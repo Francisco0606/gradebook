@@ -14,21 +14,32 @@ class GradesController < ApplicationController
 
   # GET /grades/new
   def new
-    @grade = Grade.new
+    if !user_signed_in?
+      redirect_to user_session_path
+    else
+      @grade = Grade.new
+    end
   end
 
   # GET /grades/1/edit
   def edit
+    if !user_signed_in?
+      redirect_to user_session_path
+    end
   end
 
   # POST /grades
   def create
-    @grade = Grade.new(grade_params)
-
-    if @grade.save
-      redirect_to @grade, notice: 'Grade was successfully created.'
+    if !user_signed_in?
+      redirect_to user_session_path
     else
-      render :new
+      @grade = Grade.new(grade_params)
+
+      if @grade.save
+        redirect_to @grade, notice: 'Grade was successfully created.'
+      else
+        render :new
+      end
     end
   end
 
@@ -43,8 +54,12 @@ class GradesController < ApplicationController
 
   # DELETE /grades/1
   def destroy
-    @grade.destroy
-    redirect_to grades_url, notice: 'Grade was successfully destroyed.'
+    if !user_signed_in?
+      redirect_to user_session_path
+    else
+      @grade.destroy
+      redirect_to grades_url, notice: 'Grade was successfully destroyed.'
+    end
   end
 
   private
