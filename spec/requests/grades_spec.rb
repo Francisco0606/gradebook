@@ -128,5 +128,33 @@ RSpec.describe "/grades", type: :request do
       get grades_url
       expect(response).to redirect_to(new_user_session_path)
     end
+
+    it "should not get new" do
+      get new_grade_url
+      expect(response).to redirect_to(new_user_session_path)
+    end
+
+    it "should not create post" do
+      post grades_url, params: { grade: attributes_for(:grade, :valid) }
+      expect(response).to redirect_to(new_user_session_path)
+    end
+
+    it "should not get edit" do
+      grade = create(:grade, :valid)
+      get edit_grade_url(grade)
+      expect(response).to redirect_to(new_user_session_path)
+    end
+
+    it "should not update post" do
+      grade = create(:grade, :valid)
+      patch grade_url(grade), params: { grade: attributes_for(:grade, :valid) }
+      expect(response).to have_http_status(:redirect)
+    end
+    
+    it "should not destroy post" do
+      grade = create(:grade, :valid)
+      delete grade_url(grade)
+      expect(response).to redirect_to(new_user_session_path)
+    end
   end
 end
