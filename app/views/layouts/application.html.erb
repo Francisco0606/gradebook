@@ -15,10 +15,10 @@
             <%= button_to "Sign out", destroy_user_session_path, method: :delete %>
       <% else %>
             <% if !user_signed_in? %>
-              <a href="/users/sign_in">Sign In</a> -
+              <a button_to="/users/sign_in">Sign In</a> -
             <% else %>
-              <a href="/">View Gradebook</a> -
-              <a href="/users/sign_in">Sign In</a> -
+              <a link_to="/">View Gradebook</a> -
+              <a button_to="/users/sign_in">Sign In</a> -
             <% end %>
       <% end %>
     </div>
