@@ -12,8 +12,4 @@ class User < ApplicationRecord
     return account_id == 1
   end
 
-  def non_signed_in?
-    return account_id == 2
-  end
-  
 end
