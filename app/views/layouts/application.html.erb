@@ -15,7 +15,7 @@
         <%= link_to "View Gradebook", grades_url , class: "nav-link" %>
         <%= button_to "Sign out", destroy_user_session_path, method: :delete %>
       <% else %>
-        <a button_to="/users/sign_in">Sign In</a> -
+        <%= button_to "Sign In", new_user_session_path, method: :get %>
       <% end %>
     </div>
     <% if flash[:error] %>
