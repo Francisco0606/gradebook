@@ -184,7 +184,7 @@ end
 
     context "when user is not a teacher" do
         before do 
-          @ta = create(:user, account_id: 0) # Assuming 0 corresponds to TA
+          @ta = create(:user, account_id: 0) 
           sign_in @ta
         end
   
