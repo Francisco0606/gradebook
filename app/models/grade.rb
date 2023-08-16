@@ -1,12 +1,12 @@
 class Grade < ApplicationRecord
-    validates_presence_of :student_id
+    validates :student_id, presence: { message: "ID can't be blank" }, length: { is:6, message: "ID is the wrong length (should be 6 characters)" }, uniqueness: { is:true, message: "ID has already been taken" }
     validates_presence_of :student_name
     validates_presence_of :student_grade
     validate :grade_must_be_greater_than_or_equal_to_zero
 
     #validates numerical, uniqueness, and lenght to ID 
-    validates :student_id, length: { is:6 }
-    validates :student_id, uniqueness: true
+    # validates :student_id, length: { is:6, message: "ID is the wrong length (should be 6 characters)" }
+    # validates :student_id, uniqueness: { is:true, message: "ID has already been taken" }
     
     #custom validator
     #makes sure grade is larger than zero
