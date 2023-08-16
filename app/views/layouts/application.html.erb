@@ -12,14 +12,10 @@
     <strong>Navigation: </strong>
     <div class="nav-link">
       <% if user_signed_in? %>
-            <%= button_to "Sign out", destroy_user_session_path, method: :delete %>
+        <%= link_to "View Gradebook", grades_url , class: "nav-link" %>
+        <%= button_to "Sign out", destroy_user_session_path, method: :delete %>
       <% else %>
-            <% if !user_signed_in? %>
-              <a button_to="/users/sign_in">Sign In</a> -
-            <% else %>
-              <a link_to="/">View Gradebook</a> -
-              <a button_to="/users/sign_in">Sign In</a> -
-            <% end %>
+        <a button_to="/users/sign_in">Sign In</a> -
       <% end %>
     </div>
     <% if flash[:error] %>
