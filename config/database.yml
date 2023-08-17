@@ -87,3 +87,4 @@ production:
   database: my_db_4t13
   username: my_db_4t13_user
   password: <%= ENV['MYAPP_DATABASE_PASSWORD'] %>
+  url: <%= ENV['DATABASE_URL'] %>
