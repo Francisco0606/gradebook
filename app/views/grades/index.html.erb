@@ -4,6 +4,9 @@
 
 <table>
   <thead>
+    <p>
+      Sort by:<%= link_to 'Ascending', root_path(sort: 'lowest') %>   |   <%= link_to 'Descending', root_path(sort: 'highest') %></th>
+    <p>
     <tr>
       <th>Student ID</th>
       <th>Student name</th>
@@ -13,6 +16,8 @@
   </thead>
 
   <tbody>
+    <% @grades = @grades.order(student_grade: :asc) if params[:sort] == 'lowest' %>
+    <% @grades = @grades.order(student_grade: :desc) if params[:sort] == 'highest' %>
     <% @grades.each do |grade| %>
       <tr>
         <td><%= grade.student_id %></td>
