@@ -1,12 +1,20 @@
 Given("there are grades in the gradebook") do
-    @teacher = create(:user)
+    @teacher = create(:user,:canDel)
+    @ta = create(:user,:cantDel)
     @eric = create(:grade, :valid)
     @tomai = create(:grade, :valid)
     @schweller = create(:grade, :valid)
     @wylie = create(:grade, :valid)
 end
 
-Given("I sign in") do
+Given("I sign in as a ta?") do
+    visit new_user_session_path
+    fill_in "user_email", with: @ta.email
+    fill_in "user_password", with: "123greetings"
+    click_on "Log in"
+end
+
+Given("I sign in as a teacher?") do
     visit new_user_session_path
     fill_in "user_email", with: @teacher.email
     fill_in "user_password", with: "123greetings"
@@ -15,6 +23,7 @@ end
 
 When("I visit the homepage") do
     visit root_path
+    
 end
 
 Then ("I click on a user's name") do
