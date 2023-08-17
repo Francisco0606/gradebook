@@ -1,9 +1,21 @@
+def verify_grade_order(order)
+    sorted_grades = @grades.map(&:student_grade)
+    sorted_grades = order == "ascending" ? sorted_grades.sort : sorted_grades.sort.reverse
+  
+    page_content = page.body.gsub(/\s+/, " ")
+    sorted_grades.each_cons(2) do |a, b|
+      expect(page_content.index(a.to_s)).to be <= page_content.index(b.to_s)
+    end
+  end
+#Paco^
+
 Given("there are grades in the gradebook") do
     @teacher = create(:user)
     @eric = create(:grade, :valid)
     @tomai = create(:grade, :valid)
     @schweller = create(:grade, :valid)
     @wylie = create(:grade, :valid)
+    @grades = Grade.all #Paco
 end
 
 Given("I sign in") do
@@ -57,3 +69,33 @@ end
 When("I click {string} on a post") do |string|
     click_on string, :match => :first
 end
+
+#Paco
+Given("I am a signed-in user") do
+    visit new_user_session_path
+    fill_in "user_email", with: @teacher.email
+    fill_in "user_password", with: "123greetings"
+    click_on "Log in"
+  end
+  
+  When("I click {string} button") do |button_text|
+    click_on button_text
+  end
+  
+  Then("I should see the grades listed in ascending order") do
+    verify_grade_order("ascending")
+  end
+  
+  Then("I should see the grades listed in descending order") do
+    verify_grade_order("descending")
+  end
+  
+  Then("I should see the grades listed in {string} order") do |order|
+    sorted_grades = @grades.map(&:student_grade)
+    sorted_grades = order == "ascending" ? sorted_grades.sort : sorted_grades.sort.reverse
+  
+    page_content = page.body.gsub(/\s+/, " ")
+    sorted_grades.each_cons(2) do |a, b|
+      expect(page_content.index(a.to_s)).to be <= page_content.index(b.to_s)
+    end
+  end
