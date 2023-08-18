@@ -84,6 +84,8 @@ production:
   # For details on connection pooling, see Rails configuration guide
   # https://guides.rubyonrails.org/configuring.html#database-pooling
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+
   database: final_project_db_c1lg
   username: final_project_db_c1lg_user
+
   password: <%= ENV['MYAPP_DATABASE_PASSWORD'] %>
